@@ -1,12 +1,8 @@
-// Copied from https://judge.yosupo.jp/submission/61447
-
 #include <bits/stdc++.h>
 using namespace std;
-
 using ll = long long;
 using ull = unsigned long long;
 using ld = long double;
-
 mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
 ll rand(ll x){
 	return (ull)(rng())%x;

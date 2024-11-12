@@ -2,9 +2,7 @@
 // smallest x such that a**x = n (mod p) (1e9 contrainst)
 #include "bits/stdc++.h"
 using namespace std;
-
 #define int long long
-
 int a,n,p;
 int powmod(int a, int k, int m){
    	int ans=1;
@@ -45,4 +43,4 @@ signed main(){
 	}
 	cout<<"DNE";
     return 0;
-}	
+}

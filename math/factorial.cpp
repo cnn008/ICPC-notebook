@@ -1,3 +1,4 @@
+// factorial up to 1e9
 __attribute__((target("avx2"), optimize("O3,unroll-loops"))) int calc(int n){
   if (n >= mod) return 0;
   if (n * 2 > mod) {

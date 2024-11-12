@@ -1,8 +1,6 @@
 // check if any subset of a list have xor equal x
-
 #include "bits/stdc++.h"
 using namespace std;
-
 struct xor_basis{
 	int lg,sz;
 	vector <int> basis;
