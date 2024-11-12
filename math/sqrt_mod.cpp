@@ -51,6 +51,7 @@ ll Cipolla(ll X, ll q) {
     }
     assert(0);
 }
+// find a such that a^2 dd X mod q
 ll sqrtMod(ll X, ll q) {
     X %= q;
     if (q == 2 || X == 0) return min(X, q-X);

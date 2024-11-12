@@ -15,10 +15,8 @@ struct Data{
 vector <Data> v;
 struct Fenwick2D{
     #define gb(x) (x)&(-x)
-    vector<vector<int>> nodes;
-    vector<vector<int>> bit;
-    vector <int> record;
-    vector <int> vis;
+    vector<vector<int>> nodes,bit;
+    vector <int> record,vis;
     int sx;
     void init(int _sx){
         sx = _sx;
