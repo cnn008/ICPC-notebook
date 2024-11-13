@@ -1,3 +1,4 @@
+// z[i] : 0->z[i]-1 = i -> i+z[i]-1
 vector <int> z_func(string s){
 	int n=(int)s.size();
 	vector <int> z(n,0);

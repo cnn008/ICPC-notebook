@@ -1,3 +1,4 @@
+// pi[i] : longest substring being both prefix and suffix
 vector <int> prefix_func(vector<int> s){
 	int n=(int)s.size();
 	vector <int> pi(n,0);

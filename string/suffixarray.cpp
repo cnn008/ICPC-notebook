@@ -101,11 +101,7 @@ vector<int> build_lcp(const T &s, const vector<int> &sa) {
 int n;
 string s;
 signed main(){
-	ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-	cin>>s;
 	n=(int)s.size();
 	vector <int> sa=suffix_array(s,256);
 	vector <int> lcp=build_lcp(s,sa);
-    return 0;
 }

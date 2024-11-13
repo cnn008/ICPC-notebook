@@ -67,10 +67,7 @@ int sum(long long n) {
 }
 long long n;
 signed main(){
-	ios_base::sync_with_stdio(0);
-	cin.tie(0);
 	mp.max_load_factor(0.25);
 	cin>>n;
 	cout<<sum(n);
-	return 0;
 }     
