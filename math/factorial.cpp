@@ -5,9 +5,7 @@ __attribute__((target("avx2"), optimize("O3,unroll-loops"))) int calc(int n){
     	int f = calc(mod - 1 - n);
     	if (n % 2 == 0) f = mod - f;
     	int res = 1;
-    	for (int e = mod - 2; e; f = 1LL * f * f % mod, e >>= 1) {
-      		if (e & 1) res = 1LL * res * f % mod;
-    		}
+    	for (int e = mod - 2; e; f = 1LL * f * f % mod, e >>= 1) if (e & 1) res = 1LL * res * f % mod;
     	return res;
   	}
   	int a[8] = {1, 1, 1, 1, 1, 1, 1, 1};

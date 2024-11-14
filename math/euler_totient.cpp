@@ -1,8 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int mod=998244353;
-const int N=2e6;
-const int inv2=499122177; 
+const int mod=998244353;const int N=2e6;const int inv2=499122177; 
 template<int N>
 struct Sieve{
 private:

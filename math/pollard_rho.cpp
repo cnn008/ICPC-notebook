@@ -123,11 +123,3 @@ vector<ll> get_all_divisors(ll n){
 	sort(res.begin(), res.end());
 	return res;
 }
-signed main(){
-	ios_base::sync_with_stdio(0);
-	cin.tie(0);
-	ll n;
-	cin>>n;
-	for(auto x:get_all_divisors(n)) cout<<x<<" ";
-	return 0;
-}

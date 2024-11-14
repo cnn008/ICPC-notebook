@@ -7,8 +7,7 @@ ll rand(ll x){
 }
 ll euclid(ll x, ll y, ll &k, ll &l) {
     if (y == 0) {
-        k = 1;
-        l = 0;
+        k = 1; l = 0;
         return x;
     }
     ll g = euclid(y, x % y, l, k);
@@ -28,8 +27,7 @@ ll Cipolla(ll X, ll q) {
     int K = 60;
     while((1LL << K) > pw) K--;
     while(1){
-        ll t = rand(q);
-        ll a = 0, b = 0, c = 1;
+        ll t = rand(q), a = 0, b = 0, c = 1;
         for (int k = K; k >= 0; k--) {
             a = b * b % q;
             b = 2 * b * c % q;

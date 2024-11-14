@@ -1,10 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 /// Magic constants, optimized to answer prime counting queries for n=10^12 but can be tweaked
-const int MAXV = 20000010;
-const int MAXP = 7;
-const int MAXN = 50;
-const int MAXM = 2 * 3 * 7 * 5 * 11 * 13 * 17; 
+const int MAXV = 20000010;const int MAXP = 7;const int MAXN = 50;const int MAXM = 2 * 3 * 7 * 5 * 11 * 13 * 17; 
 constexpr auto fast_div = [](const long long& a, const int& b) ->long long {return double(a) / b + 1e-9;};
 vector<int> primes;
 bitset<MAXV> is_prime;
@@ -46,10 +43,7 @@ uint64_t messel_lehmer(long long n){
 }
 long long n;
 signed main(){
-   	ios_base::sync_with_stdio();
-   	cin.tie(0);
     gen();
     cin>>n;
     cout<<messel_lehmer(n);
-    return 0;
 }
