@@ -1,46 +1,36 @@
-// https://dmoj.ca/problem/mathp9
 // smallest x such that a**x = n (mod p) (1e9 contrainst)
-#include "bits/stdc++.h"
-using namespace std;
-#define int long long
-int a,n,p;
-int powmod(int a, int k, int m){
-   	int ans=1;
-    while(k){
-        if(k&1) ans=(ans*a)%m;
-        a=(a*a)%m;
-        k/=2;
-    }
-    return ans;
-}
-int inv(int a, int p){
-	return powmod(a,p-2,p);
-}
-map <int,int> mp;
-signed main(){
-	ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    a=100;n=14;p=31;
-	int b=sqrt(p),prod=1;
-	mp[1]=0;
-	for(int i=1; i<b; i++){
-		prod=(prod*a)%p;
-		mp[prod]=i;
+int solve(int a, int n, int p){
+	if(!n){
+		int pr=a,cnt=1;
+		while(1){
+			if(cnt>=30) return -1;
+			if(!pr) return cnt;
+			pr=(pr*a)%p;
+			cnt++;
+		}	
 	}
-	int val=(prod*a)%p;
-	prod=1;
-	for(int i=1; i<=b; i++){
-		if(powmod(a,i,p)==n){
-			cout<<i;
-			return 0;
-		}
-		prod=(prod*val)%p;
-		int j=(n*inv(prod,p))%p;
-		if(mp.count(j)){
-			cout<<i*b+mp[j];
-			return 0;
-		}
+	int g=__gcd(a,p);
+	if(n%g) return -1;
+	int A=a;
+	a/=g;n/=g;p/=g;A%=p;
+	if(a==n) return 1;
+	if(!A) return -1;
+	if(n%__gcd(A,p)) return -1;
+	unordered_map <int,int> mp;
+	int s=sqrt(p);
+	if(s*s==p) s--;
+	int x=1,prod=a;
+	for(int i=1; i<=s; i++) x=(x*A)%p;
+	for(int i=1; i<=s+1; i++){
+		prod=(prod*x)%p;
+		if(!mp.count(prod)) mp[prod]=i;
 	}
-	cout<<"DNE";
-    return 0;
+	prod=n;
+	int ans=INT_MAX;
+	for(int i=0; i<=s; i++){
+		if(mp.count(prod)) ans=min(ans,mp[prod]*s-i);
+		prod=(prod*A)%p;
+	}
+	if(ans==INT_MAX || a*powmod(A,ans)%p!=n) ans=-2;
+	return ans+1;
 }
