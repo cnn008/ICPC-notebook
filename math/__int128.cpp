@@ -1,16 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 using i128 = __int128_t;
-
 i128 str2i128(std::string str) {
     i128 ret = 0;
     bool minus = false;
     for (auto c : str) {
-        if (c == '-')
-            minus = true;
-        else
-            ret = ret * 10 + c - '0';
+        if (c == '-') minus = true;
+        else ret = ret * 10 + c - '0';
     }
     return minus ? -ret : ret;
 }
@@ -47,18 +43,6 @@ i128 gcd(i128 a, i128 b) {
 // Count trailing zeroes
 int ctz128(i128 n) {
     if (!n) return 128;
- 
-    if (!static_cast<uint64_t>(n)) {
-        return __builtin_ctzll(static_cast<uint64_t>(n >> 64)) + 64;
-    } else {
-        return __builtin_ctzll(static_cast<uint64_t>(n));
-    }
-}
-signed main(){
-	ios_base::sync_with_stdio(0);
-	cin.tie(0);
-	i128 a;
-	cin>>a;
-	cout<<a;
-	return 0;
+    if (!static_cast<uint64_t>(n)) return __builtin_ctzll(static_cast<uint64_t>(n >> 64)) + 64;
+    else return __builtin_ctzll(static_cast<uint64_t>(n));
 }
