@@ -1,65 +1,65 @@
-// given lines a_i x + b_i, query x find min val 
-// x : [1,inf] 					can be [-inf,inf], inf = 1e9
-struct LichaoTree{
-	struct Line{
-		// max b=-inf, min b=inf but somtimes 0
-		int m,b,child[2];
-		int operator()(int x){return m*x+b;}
-		void swp(Line &l){
-			swap(m,l.m);
-			swap(b,l.b);
-		}
-	};
-	vector <Line> val;
-	inline void init(){
-		val.emplace_back();
-		val.back().child[0]=val.back().child[1]=-1;
-	}
-	inline int _child(int p, int d){
-		if(val[p].child[d]==-1){
-			val[p].child[d]=(int)val.size();
-			init();
-		}
-		return val[p].child[d];
-	}
-	void clear(){
-		val.clear();
-		init();
-	}
-	// void insert(int l, int r, Line seg, int o=0){
-	    // if(l+1==r){
-	      	// if(seg(l)<val[o](l)) val[o].swp(seg);
-	      	// return;
-	    // }
-    	// int mid=(l+r)>>1;
-    	// if(val[o].m<seg.m) val[o].swp(seg);
-    	// if(val[o](mid)>seg(mid)){
-    		// val[o].swp(seg);
-      		// insert(l,mid,seg,_child(o,0));
-    	// }else insert(mid,r,seg,_child(o,1));
-  	// }
-  	// int query(int l, int r, int x, int o=0){
-    	// if(l+1==r) return val[o](x);
-    	// int mid=(l+r)>>1;
-    	// if(x<mid) return min(val[o](x),query(l,mid,x,_child(o,0)));
-    	// else return min(val[o](x),query(mid,r,x,_child(o,1)));
-  	// }
-  	void insert(int l, int r, Line seg, int o=0){
-	    if(l+1==r){
-	      	if(seg(a[l].y)>val[o](a[l].y)) val[o].swp(seg);
-	      	return;
-	    }
-    	int mid=(l+r)>>1;
-    	if(val[o].m<seg.m) val[o].swp(seg);
-    	if(val[o](a[mid].y)<seg(a[mid].y)){
-    		val[o].swp(seg);
-      		insert(l,mid,seg,_child(o,0));
-    	}else insert(mid,r,seg,_child(o,1));
-  	}
-  	int query(int l, int r, int x, int o=0){
-    	if(l+1==r) return val[o](a[x].y);
-    	int mid=(l+r)>>1;
-    	if(x<mid) return max(val[o](a[x].y),query(l,mid,x,_child(o,0)));
-    	else return max(val[o](a[x].y),query(mid,r,x,_child(o,1)));
-  	}
-}lc;
+const ll INF = 1e18L + 5;
+struct implicit_lichao_tree {
+    struct node {
+        ll a, b;
+        ll nxt[2];
+        node(ll v1=-INF, ll v2=-INF) {
+        	a=v1; b=v2;
+        	nxt[0] = nxt[1] = -1;
+        }
+        ll operator ()(ll x) {
+            if (a == -INF) return -INF;
+            return a*x + b;
+        }
+    };
+    vector<node> st;
+    void build() {
+    	st.clear();
+    	st.pb(node(-INF, -INF));
+    }
+    void new_node(ll id, ll o) {
+    	st[id].nxt[o] = st.size();
+    	st.pb(node(-INF, -INF));
+    	ll idx = st[id].nxt[o];
+    	st[idx].a = st[id].a;
+    	st[idx].b = st[id].b;
+    }
+    void add(ll id, ll l, ll r, ll a, ll b) {
+    	if(l == r) {
+    		if(st[id](l) < a*l + b) {
+    			st[id].a = a;
+    			st[id].b = b;
+    		}
+    		return;
+    	}
+    	int mid = (l + r)/2;
+    	if(r == l + 1) mid = l;
+    	if(st[id].a > a) {
+    		swap(st[id].a, a);
+    		swap(st[id].b, b);
+    	}
+    	if(st[id](mid) < a*mid + b) {
+    		swap(st[id].a, a);
+    		swap(st[id].b, b);
+    		if(st[id].nxt[0] == -1) new_node(id, 0);
+    		add(st[id].nxt[0], l, mid, a, b);
+    	}
+    	else {
+    		if(st[id].nxt[1] == -1) new_node(id, 1);
+    		add(st[id].nxt[1], mid + 1, r, a, b);
+    	}
+    }
+    ll get(ll id, ll l, ll r, ll pos) {
+    	if(l == r) return st[id](pos);
+    	int mid = (l + r)/2;
+    	if(r == l + 1) mid = l;
+    	if(pos <= mid) {
+    		if(st[id].nxt[0] == -1) return st[id](pos);
+    		return max(st[id](pos), get(st[id].nxt[0], l, mid, pos));
+    	}
+    	else {
+    		if(st[id].nxt[1] == -1) return st[id](pos);
+    		return max(st[id](pos), get(st[id].nxt[1], mid + 1, r, pos));
+    	}
+    }
+} lt;
