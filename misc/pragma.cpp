@@ -7,6 +7,9 @@
 #pragma GCC optimize("Ofast")
 #pragma GCC optimization("unroll-loops, no-stack-protector")
 #pragma GCC target("avx,avx2,fma")
+
+#pragma GCC ivdep
+
 __attribute__((always_inline)) void smin(int &a, int b) {a = a < b ? a : b;}
 __attribute__((always_inline)) void smax(int &a, int b) {a = a > b ? a : b;}
 #define _F __attribute__((always_inline))
