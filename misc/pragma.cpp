@@ -9,6 +9,22 @@
 #pragma GCC target("avx,avx2,fma")
 __attribute__((always_inline)) void smin(int &a, int b) {a = a < b ? a : b;}
 __attribute__((always_inline)) void smax(int &a, int b) {a = a > b ? a : b;}
+#define _F __attribute__((always_inline))
+_F int add(int a, int b) {return (a+=b)>=MOD?a-=MOD:a;}
+_F int sub(int a, int b) {return (a-=b)<0?a+MOD:a;}
+_F int mul(int a, int b) {return (a*1LL*b)%MOD;}
+_F void set_add(int& a, int b) {if((a+=b)>=MOD) a-=MOD;}
+_F void set_sub(int& a, int b) {if((a-=b)<0) a+=MOD;}
+_F void set_mul(int& a, int b) {a=mul(a, b);}
+_F int exp(int a, int b) {
+    int ans=1;
+    for(; b; b>>=1) {
+        if(b&1) set_mul(ans, a);
+        set_mul(a, a);
+    }
+    return ans;
+}
+#undef _F
 int read(){
 	int res=0;bool bo=false;char c;
 	while (((c=getchar())<'0'||c>'9')&&c!='-');
